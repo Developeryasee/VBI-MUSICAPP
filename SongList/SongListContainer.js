@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import SongListModule from './SongListModules';
 import LinearGradient from 'react-native-linear-gradient';
-import { selectAllItem } from '../reducer/getSongReducer';
+import { getSong, selectAllItem } from '../reducer/getSongReducer';
 import { useDispatch,useSelector } from 'react-redux';
 const headerHeight = 100;
 let scrollValue = 0;
@@ -64,14 +64,34 @@ export default function SongListContainer() {
         }
      
     }
+    React.useEffect(() => {
+        console.log("HIII");
+        dispatch(getSong())
+        fetch("https://jsonplaceholder.typicode.com/photos",{
+            method:'GET',
+            
+            
+        }).then(responce=>responce.json()).
+        then((json)=>{
+            console.log(json,"JSON");
+        }).catch(error=>{
+            console.log(error,"errror");
+        })
+    }, [])
+    
     return (
         <View style={styles.container}>
-            <SongListModule
+            {
+                songList.length!=0?<>
+                <SongListModule
                 onScroll={(e) => {
                     onScroll(e);
                 }}
                
             />
+                </>:null
+            }
+            
             <View style={[styles.header]}>
                 <Animated.View
                     style={[styles.searchContainer, { transform: [{ translateY }] }]}>

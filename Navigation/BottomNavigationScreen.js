@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 const Tab = createBottomTabNavigator();
 const TabBar = [
     {
-      route: 'All Songs', label: 'All Songs', activeIcon: 'musical-notes', inactiveIcon: 'musical-notes-outline', component: AllSong, tabBarcolor: 'red'
+      route: 'Home', label: 'Home', activeIcon: 'home', inactiveIcon: 'home', component: AllSong, tabBarcolor: 'red'
     },
     {
       route: 'Playlist', label: 'Playlist', activeIcon: 'playlist-plus', inactiveIcon: 'playlist-plus', component: Playlist, tabBarcolor: 'yellow'
@@ -24,12 +24,17 @@ const TabBar = [
       route: 'Album', label: 'Album',activeIcon: 'album', inactiveIcon: 'album', component: Album, tabBarcolor: 'orange'
   
     },
+    {
+      route: 'save', label: 'save',activeIcon: 'save', inactiveIcon: 'save', component: Album, tabBarcolor: 'orange'
+  
+    },
+    
   ]
   const { width } = Dimensions.get('window')
-  const MARGIN = 16;
-  const TAB_BAR_WIDTH = (94 / 100 * (width)) - 2 * MARGIN;
+  const MARGIN = 0;
+  const TAB_BAR_WIDTH = ( (width)) - 2 ;
   
-  const TAB_WIDTH = TAB_BAR_WIDTH / TabBar.length
+  const TAB_WIDTH = ((TAB_BAR_WIDTH) / TabBar.length)
   function MyTabBar({ state, descriptors, navigation }) {
     const animation = useRef(new Animated.Value(1)).current;
   
@@ -46,7 +51,7 @@ const TabBar = [
     const [margin, setmargin] = useState(MARGIN)
     const translateTab = (index, width) => {
       Animated.spring(translateX, {
-        toValue: index * width,
+        toValue: index * width+(index)/4,
         useNativeDriver: true,
   
       }).start();
@@ -80,13 +85,13 @@ const TabBar = [
     return (
     <>
     
-    <Animated.View style={{ ...styles.tabBarContainer, width: TAB_BAR_WIDTH, bottom: margin, transform: [{ translateY }] }}>
-                  <Animated.View style={{ ...styles.slidingBarContainer, width: TAB_WIDTH }}>
-                    <Animated.View style={[{ transform: [{ translateX }] }]}>
+    <Animated.View style={{ ...styles.tabBarContainer, width: TAB_BAR_WIDTH,  }}>
+                  <Animated.View style={{ ...styles.slidingBarContainer, width: TAB_WIDTH,}}>
+                    <Animated.View style={[{ transform: [{ translateX }], }]}>
   
-                      <LinearGradient colors={['#F97B5A', '#F94D71']} start={{ x: 0.1, y: 0.1 }} style={styles.sildingBar}>
+                      <View style={styles.sildingBar}>
   
-                      </LinearGradient>
+                      </View>
                     </Animated.View>
   
   
@@ -176,7 +181,7 @@ const TabBar = [
       <>
         {
           label === "Album" || label==="Playlist"? <>
-            <Animated.View style={{ transform: [{ translateY }] }}>
+            <Animated.View >
               <MaterialCommunityIcons
                 name={
                   isFocused ?
@@ -188,14 +193,14 @@ const TabBar = [
                 color={
                   isFocused ?
   
-                    Colors.white :
+                  '#000' :
                     '#000'
                 }
               />
             </Animated.View>
   
           </> : <>
-            <Animated.View style={{ transform: [{ translateY }] }}>
+            <Animated.View >
               <Icons
                 name={
                   isFocused ?
@@ -207,7 +212,7 @@ const TabBar = [
                 color={
                   isFocused ?
   
-                    Colors.white :
+                    '#000' :
                     '#000'
                 }
               />
@@ -258,33 +263,29 @@ const styles = StyleSheet.create({
     tabBarContainer: {
       flexDirection: 'row',
       width: TAB_BAR_WIDTH,
-      height: 60,
-      position: 'absolute',
-      bottom: MARGIN,
-      backgroundColor: '#fff',
+      height: 65,
       alignSelf: 'center',
       alignItems: 'center',
       borderRadius: 10,
       justifyContent: 'space-around',
-      shadowColor: 'black',
-      shadowOpacity: 0.26,
-      shadowOffset: { width: 0, height: 2 },
-      shadowRadius: 10,
-      elevation: 5,
-      backgroundColor: '#FFF',
     },
     slidingBarContainer: {
       width: TAB_WIDTH,
       ...StyleSheet.absoluteFillObject,
       alignItems: 'center',
+      
     },
     sildingBar: {
-      width: 60,
-      height: 60,
-      borderRadius: 30,
-      backgroundColor: "blue",
-      bottom: 25,
-      borderWidth: 4,
-      borderColor: "#fff"
+      width: 70,
+      height: 58,
+      backgroundColor:'#fff',
+      shadowColor: 'black',
+      shadowOpacity: 0.26,
+      shadowOffset: { width: 0, height: 2 },
+      shadowRadius: 10,
+      elevation: 5,
+      borderBottomLeftRadius:6,
+      borderBottomRightRadius:6,
+
     }
   })
