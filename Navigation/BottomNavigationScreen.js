@@ -2,9 +2,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { Component ,useRef,useEffect,useState} from 'react';
 import { View, Text, StyleSheet,Dimensions,Animated,TouchableOpacity} from 'react-native';
-import Album from '../MusicContainer/Album';
+
 import AllSong from '../MusicContainer/Allsongs';
-import Playlist from '../MusicContainer/Playlist';
+// import Playlist from '../MusicContainer/Playlist';
 import Icons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -12,6 +12,21 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useSelector } from 'react-redux';
 // create a component
 const Tab = createBottomTabNavigator();
+
+const Playlist=()=>{
+  return(
+    <View style={{flex:1,backgroundColor:'red'}}>
+
+    </View>
+  )
+}
+const Album=()=>{
+  return(
+    <View style={{flex:1,backgroundColor:'pink'}}>
+
+    </View>
+  )
+}
 const TabBar = [
     {
       route: 'Home', label: 'Home', activeIcon: 'home', inactiveIcon: 'home', component: AllSong, tabBarcolor: 'red'
